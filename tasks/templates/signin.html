@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div 
+  class="container-fluid py-5 d-flex justify-content-center align-items-center" 
+  style="min-height: 100vh; background-image: url('https://wallpapers.com/images/hd/mac-dark-5120-x-2880-6kdtbj49exajussf.jpg'); background-size: cover; background-position: center; background-repeat: no-repeat;">
+  <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px; border: none; background: rgba(255, 255, 255, 0.9);">
+    <!-- Título del formulario -->
+    <div class="text-center mb-4">
+      <h1 class="h3 fw-bold">Iniciar Sesión</h1>
+    </div>
+    
+    {% if error %}
+    <div class="alert alert-danger text-center" role="alert">
+      {{ error }}
+    </div>
+    {% endif %}
+
+    <form action="/signin/" method="POST" class="needs-validation" novalidate>
+      {% csrf_token %}
+      
+      {{ form.as_p }}
+      
+      <button type="submit" class="btn btn-primary w-100">Ingresar</button>
+    </form>
+
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div 
+  class="container-fluid d-flex justify-content-center align-items-center text-black" 
+  style="background-color: #ffffff; min-height: 100vh;">
+  <div class="card shadow p-4" style="background-color: #ffffff; max-width: 500px; width: 100%; border: none;">
+
+    <div class="text-center mb-4">
+      <h1 class="h4 fw-bold text-primary">{{ task.title }}</h1>
+    </div>
+
+    {% if error %}
+    <div class="alert alert-danger text-center" role="alert">
+      {{ error }}
+    </div>
+    {% endif %}
+
+    <div class="mb-4">
+      <h2 class="h5 text-black mb-3">Actualizar Tarea</h2>
+      <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-primary px-4">Actualizar</button>
+        </div>
+      </form>
+    </div>
+
+    <div>
+      
+      <form action="{% url 'delete_task' task.id %}" method="POST">
+        {% csrf_token %}
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-danger px-4">Eliminar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

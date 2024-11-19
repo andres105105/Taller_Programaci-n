@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div 
+  class="container-fluid py-5 text-light" 
+  style="background-color: #ffffff; min-height: 100vh;">
+  <h1 class="text-center text-primary mb-4">Lista de Productos</h1>
+
+  {% if tasks %}
+  <div class="table-responsive">
+    <table class="table table-dark table-striped table-hover align-middle">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Título</th>
+          <th scope="col">Descripción</th>
+          <th scope="col">Acción</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for task in tasks %}
+        <tr>
+          <th scope="row">{{ task.id }}</th>
+          <td>
+            {% if task.important %}
+            <strong class="text-primary">{{ task.title }}</strong>
+            {% else %}
+            {{ task.title }}
+            {% endif %}
+          </td>
+          <td>{{ task.description }}</td>
+          <td>
+            <a href="{% url 'task_detail' task.id %}" class="btn btn-warning btn-sm">
+              Ver Detalles
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <div class="alert alert-secondary text-center" role="alert">
+    No hay productos registrados aún.
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
